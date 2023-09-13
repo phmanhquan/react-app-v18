@@ -9,6 +9,7 @@ import Message from "./Message";
 import produce from "immer";
 import NavBar from "./Components/NavBar";
 import Cart from "./Components/Cart";
+import ExpandableText from "./Components/ExpandableText";
 
 function App() {
   const [cartItems, setCartItems] = useState([
@@ -34,6 +35,21 @@ function App() {
         onRemove={handleRemove}
         onClear={() => setCartItems([])}
       />
+      <ExpandableText
+        maxChars={10}
+        children=" Include popular icons in your React projects easily with react-icons,
+      which utilizes ES6 imports that allows you to include only the icons that
+      your project is using.Include popular icons in your React projects easily
+      with react-icons, which utilizes ES6 imports that allows you to include
+      only the icons that your project is using.Include popular icons in your
+      React projects easily with react-icons, which utilizes ES6 imports that
+      allows you to include only the icons that your project is using.Include
+      popular icons in your React projects easily with react-icons, which
+      utilizes ES6 imports that allows you to include only the icons that your
+      project is using.Include popular icons in your React projects easily with
+      react-icons, which utilizes ES6 imports that allows you to include only
+      the icons that your project is using."
+      ></ExpandableText>
     </div>
   );
 }
