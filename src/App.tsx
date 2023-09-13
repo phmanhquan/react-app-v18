@@ -6,6 +6,7 @@ import "./App.css";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 import Like from "./Components/Like";
 import Message from "./Message";
+import produce from "immer";
 
 function App() {
   const [game, setGame] = useState({
@@ -35,6 +36,14 @@ function App() {
     //     item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
     //   ),
     // });
+
+    setGame(
+      produce((draft) => {
+        const item = draft.items.find((game) => game.id === 1);
+        if (item) item.quantity = 5;
+      })
+    );
+
     // console.log(game);
 
     // //add item array
@@ -43,14 +52,18 @@ function App() {
     // // remove item array
     // setTags(tags.filter((tag) => tag !== "he he"));
 
-    //update item array
-    setTags(tags.map((tag) => (tag === "happy" ? "he he" : tag)));
-
-    console.log(tags);
+    // //update item array
+    // setTags(tags.map((tag) => (tag === "happy" ? "he he" : tag)));
+    // console.log(tags);
   };
 
   return (
     <div>
+      {game.items.map((item) => (
+        <p key={item.id}>
+          {item.title} {item.quantity > 1 ? "hot" : "new"}
+        </p>
+      ))}
       <Button onClick={handleClick}>Show</Button>
       {/* <Message></Message> */}
     </div>
