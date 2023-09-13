@@ -4,6 +4,7 @@ import { useState } from "react";
 import ListGroup from "./Components/ListGroup";
 import "./App.css";
 import { BsFillCalendarEventFill } from "react-icons/bs";
+import Like from "./Components/Like";
 
 function App() {
   const [alertVisible, setAlertVisibility] = useState(false);
@@ -21,7 +22,8 @@ function App() {
         onSelectItem={() => {}}
       ></ListGroup>
       <BsFillCalendarEventFill color="red" size="40" /> */}
-      <Button onClick={() => {}}>Supper Button</Button>
+      {/* <Button onClick={() => {}}>Supper Button</Button> */}
+      <Like onClick={() => console.log("Clicked")} />
     </div>
   );
 }
