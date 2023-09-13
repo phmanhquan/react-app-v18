@@ -8,12 +8,12 @@ const List = styled.ul`
 `;
 
 interface ListItemProps {
-  active: boolean;
+  active: number;
 }
 
 const ListItem = styled.li<ListItemProps>`
   padding: 5px;
-  background: ${(props) => (props.active ? "blue" : "none")};
+  background: ${(props) => (props.active === 1 ? "blue" : "none")};
 `;
 
 styled;
@@ -41,7 +41,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             //     ? "list-group-item active"
             //     : "list-group-item"
             // }
-            active={index === selectedIndex}
+            active={index === selectedIndex ? 1 : 0}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
