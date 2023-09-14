@@ -10,49 +10,73 @@ import produce from "immer";
 import NavBar from "./Components/NavBar";
 import Cart from "./Components/Cart";
 import ExpandableText from "./Components/ExpandableText";
+import Form from "./Components/Form";
 
 function App() {
-  const [cartItems, setCartItems] = useState([
-    "Product 1",
-    "Product 2",
-    "Product 3",
-    "Product 4",
-  ]);
+  // const [cartItems, setCartItems] = useState([
+  //   "Product 1",
+  //   "Product 2",
+  //   "Product 3",
+  //   "Product 4",
+  // ]);
 
-  const handleRemove = () => {
-    if (cartItems.length > 0) {
-      let condition = "Product " + cartItems.length.toString();
-      console.log(condition);
-      setCartItems(cartItems.filter((item) => item !== condition));
-    }
-  };
+  // const handleRemove = () => {
+  //   if (cartItems.length > 0) {
+  //     let condition = "Product " + cartItems.length.toString();
+  //     console.log(condition);
+  //     setCartItems(cartItems.filter((item) => item !== condition));
+  //   }
+  // };
 
   return (
     <div>
-      <NavBar cartItemCount={cartItems.length} />
-      <Cart
-        cartItems={cartItems}
-        onRemove={handleRemove}
-        onClear={() => setCartItems([])}
-      />
-      <ExpandableText
-        maxChars={10}
-        children=" Include popular icons in your React projects easily with react-icons,
-      which utilizes ES6 imports that allows you to include only the icons that
-      your project is using.Include popular icons in your React projects easily
-      with react-icons, which utilizes ES6 imports that allows you to include
-      only the icons that your project is using.Include popular icons in your
-      React projects easily with react-icons, which utilizes ES6 imports that
-      allows you to include only the icons that your project is using.Include
-      popular icons in your React projects easily with react-icons, which
-      utilizes ES6 imports that allows you to include only the icons that your
-      project is using.Include popular icons in your React projects easily with
-      react-icons, which utilizes ES6 imports that allows you to include only
-      the icons that your project is using."
-      ></ExpandableText>
+      <Form></Form>
     </div>
   );
 }
+
+// function App() {
+//   const [cartItems, setCartItems] = useState([
+//     "Product 1",
+//     "Product 2",
+//     "Product 3",
+//     "Product 4",
+//   ]);
+
+//   const handleRemove = () => {
+//     if (cartItems.length > 0) {
+//       let condition = "Product " + cartItems.length.toString();
+//       console.log(condition);
+//       setCartItems(cartItems.filter((item) => item !== condition));
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <NavBar cartItemCount={cartItems.length} />
+//       <Cart
+//         cartItems={cartItems}
+//         onRemove={handleRemove}
+//         onClear={() => setCartItems([])}
+//       />
+//       <ExpandableText
+//         maxChars={10}
+//         children=" Include popular icons in your React projects easily with react-icons,
+//       which utilizes ES6 imports that allows you to include only the icons that
+//       your project is using.Include popular icons in your React projects easily
+//       with react-icons, which utilizes ES6 imports that allows you to include
+//       only the icons that your project is using.Include popular icons in your
+//       React projects easily with react-icons, which utilizes ES6 imports that
+//       allows you to include only the icons that your project is using.Include
+//       popular icons in your React projects easily with react-icons, which
+//       utilizes ES6 imports that allows you to include only the icons that your
+//       project is using.Include popular icons in your React projects easily with
+//       react-icons, which utilizes ES6 imports that allows you to include only
+//       the icons that your project is using."
+//       ></ExpandableText>
+//     </div>
+//   );
+// }
 
 // function App() {
 //   const [game, setGame] = useState({
