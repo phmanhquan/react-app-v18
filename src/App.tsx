@@ -13,6 +13,9 @@ import ExpandableText from "./Components/ExpandableText";
 import Form from "./Components/Form";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+
+export const categories = ["Groceries", "Utilities", "Entertainment"];
 
 function App() {
   // const [cartItems, setCartItems] = useState([
@@ -42,7 +45,7 @@ function App() {
 
   const handleDelete = (id: number) => {
     setExpenses(expenses.filter((expense) => expense.id !== id));
-    setVisibleExpenses(expenses.filter((expense) => expense.id !== id));
+    setVisibleExpenses(visibleExpenses.filter((expense) => expense.id !== id));
   };
 
   const handleReload = () => {
@@ -60,14 +63,22 @@ function App() {
 
   return (
     <div>
-      <ExpenseFilter
-        onSelectCategory={(value) => handleFilter(value)}
-      ></ExpenseFilter>
-      <ExpenseList
-        expenses={expenses}
-        onDelete={(id) => handleDelete(id)}
-        onReload={() => handleReload()}
-      ></ExpenseList>
+      <div className="mb-5">
+        <ExpenseForm></ExpenseForm>
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(value) => handleFilter(value)}
+        ></ExpenseFilter>
+      </div>
+      <div className="mb-3">
+        {" "}
+        <ExpenseList
+          expenses={expenses}
+          onDelete={(id) => handleDelete(id)}
+          onReload={() => handleReload()}
+        ></ExpenseList>
+      </div>
     </div>
   );
 }
