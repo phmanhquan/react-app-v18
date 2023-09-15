@@ -12,6 +12,7 @@ import Cart from "./Components/Cart";
 import ExpandableText from "./Components/ExpandableText";
 import Form from "./Components/Form";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 
 function App() {
   // const [cartItems, setCartItems] = useState([
@@ -31,23 +32,37 @@ function App() {
 
   const data = [
     { id: 1, description: "aaa", amount: 10, category: "Utilities" },
-    { id: 2, description: "bbb", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 10, category: "Groceries" },
     { id: 3, description: "ccc", amount: 10, category: "Utilities" },
-    { id: 4, description: "ddd", amount: 10, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 10, category: "Entertainment" },
   ];
 
   const [expenses, setExpenses] = useState(data);
+  const [visibleExpenses, setVisibleExpenses] = useState(expenses);
 
   const handleDelete = (id: number) => {
     setExpenses(expenses.filter((expense) => expense.id !== id));
+    setVisibleExpenses(expenses.filter((expense) => expense.id !== id));
   };
 
   const handleReload = () => {
     setExpenses(data);
+    setVisibleExpenses(data);
+  };
+
+  const handleFilter = (value: string) => {
+    value === ""
+      ? setExpenses(visibleExpenses)
+      : setExpenses(
+          visibleExpenses.filter((expense) => expense.category == value)
+        );
   };
 
   return (
     <div>
+      <ExpenseFilter
+        onSelectCategory={(value) => handleFilter(value)}
+      ></ExpenseFilter>
       <ExpenseList
         expenses={expenses}
         onDelete={(id) => handleDelete(id)}
