@@ -45,6 +45,8 @@ function App() {
 
     const controller = new AbortController();
 
+    setLoading(true);
+
     // get -> promise -> res / err
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users", {
@@ -53,18 +55,21 @@ function App() {
       .then((res) => {
         setUsers(res.data);
         setError("");
+        setLoading(false);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
 
-    return controller.abort();
+    // return controller.abort();
   }, []);
 
   return (
     <div>
       {error && <p className="text-danger">{error}</p>}
+      {isLoading && <div className="spinner-border"></div>}
       <ul>
         {users.map((user) => (
           <li key={user.id}> {user.name} </li>
