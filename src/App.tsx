@@ -15,8 +15,6 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 
-export const categories = ["Groceries", "Utilities", "Entertainment"];
-
 function App() {
   // const [cartItems, setCartItems] = useState([
   //   "Product 1",
@@ -40,6 +38,8 @@ function App() {
     { id: 4, description: "ddd", amount: 10, category: "Entertainment" },
   ];
 
+  const [nextId, setNextId] = useState(5);
+  const [categorySelected, setCategorySelected] = useState("");
   const [expenses, setExpenses] = useState(data);
   const [visibleExpenses, setVisibleExpenses] = useState(expenses);
 
@@ -59,12 +59,28 @@ function App() {
       : setExpenses(
           visibleExpenses.filter((expense) => expense.category == value)
         );
+    setCategorySelected(value);
   };
 
   return (
     <div>
       <div className="mb-5">
-        <ExpenseForm></ExpenseForm>
+        <ExpenseForm
+          onSubmit={(newExpense) => {
+            if (
+              categorySelected === "" ||
+              categorySelected == newExpense.category
+            )
+              setExpenses([...expenses, { ...newExpense, id: nextId }]);
+
+            setVisibleExpenses([
+              ...visibleExpenses,
+              { ...newExpense, id: nextId },
+            ]);
+            setNextId(nextId + 1);
+            console.log(nextId);
+          }}
+        ></ExpenseForm>
       </div>
       <div className="mb-3">
         <ExpenseFilter
