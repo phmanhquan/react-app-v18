@@ -1,6 +1,6 @@
 import Button from "./Components/Button/Button";
 import Alert from "./Components/Alert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListGroup from "./Components/ListGroup";
 import "./App.css";
 import { BsFillCalendarEventFill } from "react-icons/bs";
@@ -16,12 +16,19 @@ import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ProductList from "./Components/ProductList";
 
+const connect = () => console.log("connecting");
+const disconnect = () => console.log("disconnecting");
+
 function App() {
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
+  useEffect(() => {
+    connect();
+    return () => disconnect();
+  });
 
   return (
     <div>
-      <select
+      {/* <select
         className="form-select"
         onChange={(event) => setCategory(event.target.value)}
       >
@@ -30,7 +37,7 @@ function App() {
         <option value="product 2">product 2</option>
         <option value="product 3">product 3</option>
       </select>
-      <ProductList category={category}></ProductList>
+      <ProductList category={category}></ProductList> */}
     </div>
   );
 }
