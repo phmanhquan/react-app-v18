@@ -17,11 +17,7 @@ import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ProductList from "./Components/ProductList";
 // import axios, { AxiosError, CanceledError } from "axios";
 import apiClient, { CanceledError } from "./services/api-client";
-
-interface User {
-  id: number;
-  name: string;
-}
+import userService, { User } from "./services/user-service";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -29,30 +25,12 @@ function App() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    // const fetchUsers = async () => {
-    //   try {
-    //     const res = await axios.get<User[]>(
-    //       "https://jsonplaceholder.typicode.com/xusers"
-    //     );
-    //     setError("");
-    //     setUsers(res.data);
-    //   } catch (err) {
-    //     setUsers([]);
-    //     setError((err as AxiosError).message);
-    //   }
-    // };
-
-    // fetchUsers();
-
-    const controller = new AbortController();
-
     setLoading(true);
 
     // get -> promise -> res / err
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
+    const { request, cancel } = userService.getAllUser();
+
+    request
       .then((res) => {
         setUsers(res.data);
         setError("");
@@ -64,14 +42,14 @@ function App() {
         setLoading(false);
       });
 
-    // return controller.abort();
+    return () => cancel();
   }, []);
 
   const deleteUser = (user: User) => {
     setUsers(users.filter((u) => u.id !== user.id));
     const originalUsers = [...users];
 
-    apiClient.delete("/users/" + user.id).catch((err) => {
+    userService.deleteUser(user.id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
@@ -82,8 +60,8 @@ function App() {
     const newUser = { id: 0, name: "jacky" };
     setUsers([newUser, ...users]);
 
-    apiClient
-      .post("/users", newUser)
+    userService
+      .addNewUser(newUser)
       .then(({ data: savedUser }) => {
         setUsers([savedUser, ...users]);
       })
@@ -98,7 +76,7 @@ function App() {
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
     const originalUsers = [...users];
 
-    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+    userService.updateNewUser(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
