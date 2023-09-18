@@ -14,90 +14,110 @@ import Form from "./Components/Form";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+import ProductList from "./Components/ProductList";
 
 function App() {
-  // const [cartItems, setCartItems] = useState([
-  //   "Product 1",
-  //   "Product 2",
-  //   "Product 3",
-  //   "Product 4",
-  // ]);
-
-  // const handleRemove = () => {
-  //   if (cartItems.length > 0) {
-  //     let condition = "Product " + cartItems.length.toString();
-  //     console.log(condition);
-  //     setCartItems(cartItems.filter((item) => item !== condition));
-  //   }
-  // };
-
-  const data = [
-    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
-    { id: 2, description: "bbb", amount: 10, category: "Groceries" },
-    { id: 3, description: "ccc", amount: 10, category: "Utilities" },
-    { id: 4, description: "ddd", amount: 10, category: "Entertainment" },
-  ];
-
-  const [nextId, setNextId] = useState(5);
-  const [categorySelected, setCategorySelected] = useState("");
-  const [expenses, setExpenses] = useState(data);
-  const [visibleExpenses, setVisibleExpenses] = useState(expenses);
-
-  const handleDelete = (id: number) => {
-    setExpenses(expenses.filter((expense) => expense.id !== id));
-    setVisibleExpenses(visibleExpenses.filter((expense) => expense.id !== id));
-  };
-
-  const handleReload = () => {
-    setExpenses(data);
-    setVisibleExpenses(data);
-  };
-
-  const handleFilter = (value: string) => {
-    value === ""
-      ? setExpenses(visibleExpenses)
-      : setExpenses(
-          visibleExpenses.filter((expense) => expense.category == value)
-        );
-    setCategorySelected(value);
-  };
+  const [category, setCategory] = useState("");
 
   return (
     <div>
-      <div className="mb-5">
-        <ExpenseForm
-          onSubmit={(newExpense) => {
-            if (
-              categorySelected === "" ||
-              categorySelected == newExpense.category
-            )
-              setExpenses([...expenses, { ...newExpense, id: nextId }]);
-
-            setVisibleExpenses([
-              ...visibleExpenses,
-              { ...newExpense, id: nextId },
-            ]);
-            setNextId(nextId + 1);
-            console.log(nextId);
-          }}
-        ></ExpenseForm>
-      </div>
-      <div className="mb-3">
-        <ExpenseFilter
-          onSelectCategory={(value) => handleFilter(value)}
-        ></ExpenseFilter>
-      </div>
-      <div className="mb-3">
-        {" "}
-        <ExpenseList
-          expenses={expenses}
-          onDelete={(id) => handleDelete(id)}
-          onReload={() => handleReload()}
-        ></ExpenseList>
-      </div>
+      <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value=""></option>
+        <option value="product 1">product 1</option>
+        <option value="product 2">product 2</option>
+        <option value="product 3">product 3</option>
+      </select>
+      <ProductList category={category}></ProductList>
     </div>
   );
 }
+
+// function App() {
+//   // const [cartItems, setCartItems] = useState([
+//   //   "Product 1",
+//   //   "Product 2",
+//   //   "Product 3",
+//   //   "Product 4",
+//   // ]);
+
+//   // const handleRemove = () => {
+//   //   if (cartItems.length > 0) {
+//   //     let condition = "Product " + cartItems.length.toString();
+//   //     console.log(condition);
+//   //     setCartItems(cartItems.filter((item) => item !== condition));
+//   //   }
+//   // };
+
+//   const data = [
+//     { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+//     { id: 2, description: "bbb", amount: 10, category: "Groceries" },
+//     { id: 3, description: "ccc", amount: 10, category: "Utilities" },
+//     { id: 4, description: "ddd", amount: 10, category: "Entertainment" },
+//   ];
+
+//   const [nextId, setNextId] = useState(5);
+//   const [categorySelected, setCategorySelected] = useState("");
+//   const [expenses, setExpenses] = useState(data);
+//   const [visibleExpenses, setVisibleExpenses] = useState(expenses);
+
+//   const handleDelete = (id: number) => {
+//     setExpenses(expenses.filter((expense) => expense.id !== id));
+//     setVisibleExpenses(visibleExpenses.filter((expense) => expense.id !== id));
+//   };
+
+//   const handleReload = () => {
+//     setExpenses(data);
+//     setVisibleExpenses(data);
+//   };
+
+//   const handleFilter = (value: string) => {
+//     value === ""
+//       ? setExpenses(visibleExpenses)
+//       : setExpenses(
+//           visibleExpenses.filter((expense) => expense.category == value)
+//         );
+//     setCategorySelected(value);
+//   };
+
+//   return (
+//     <div>
+//       <div className="mb-5">
+//         <ExpenseForm
+//           onSubmit={(newExpense) => {
+//             if (
+//               categorySelected === "" ||
+//               categorySelected == newExpense.category
+//             )
+//               setExpenses([...expenses, { ...newExpense, id: nextId }]);
+
+//             setVisibleExpenses([
+//               ...visibleExpenses,
+//               { ...newExpense, id: nextId },
+//             ]);
+//             setNextId(nextId + 1);
+//             console.log(nextId);
+//           }}
+//         ></ExpenseForm>
+//       </div>
+//       <div className="mb-3">
+//         <ExpenseFilter
+//           onSelectCategory={(value) => handleFilter(value)}
+//         ></ExpenseFilter>
+//       </div>
+//       <div className="mb-3">
+//         {" "}
+//         <ExpenseList
+//           expenses={expenses}
+//           onDelete={(id) => handleDelete(id)}
+//           onReload={() => handleReload()}
+//         ></ExpenseList>
+//       </div>
+//     </div>
+//   );
+// }
 
 // function App() {
 //   const [cartItems, setCartItems] = useState([
