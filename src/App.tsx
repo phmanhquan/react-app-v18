@@ -15,7 +15,8 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ProductList from "./Components/ProductList";
-import axios, { AxiosError, CanceledError } from "axios";
+// import axios, { AxiosError, CanceledError } from "axios";
+import apiClient, { CanceledError } from "./services/api-client";
 
 interface User {
   id: number;
@@ -48,8 +49,8 @@ function App() {
     setLoading(true);
 
     // get -> promise -> res / err
-    axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+    apiClient
+      .get<User[]>("/users", {
         signal: controller.signal,
       })
       .then((res) => {
@@ -70,12 +71,10 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
     const originalUsers = [...users];
 
-    axios
-      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
-      .catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    apiClient.delete("/users/" + user.id).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   const addUser = () => {
@@ -83,8 +82,8 @@ function App() {
     const newUser = { id: 0, name: "jacky" };
     setUsers([newUser, ...users]);
 
-    axios
-      .post("https://jsonplaceholder.typicode.com/users", newUser)
+    apiClient
+      .post("/users", newUser)
       .then(({ data: savedUser }) => {
         setUsers([savedUser, ...users]);
       })
@@ -99,15 +98,10 @@ function App() {
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
     const originalUsers = [...users];
 
-    axios
-      .patch(
-        "https://jsonplaceholder.typicode.com/users/" + user.id,
-        updatedUser
-      )
-      .catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   return (
