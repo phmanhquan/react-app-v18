@@ -15,32 +15,58 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ProductList from "./Components/ProductList";
+import axios from "axios";
 
-const connect = () => console.log("connecting");
-const disconnect = () => console.log("disconnecting");
+interface User {
+  id: number;
+  name: string;
+}
 
 function App() {
-  // const [category, setCategory] = useState("");
+  const [users, setUsers] = useState<User[]>([]);
+
   useEffect(() => {
-    connect();
-    return () => disconnect();
-  });
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <div>
-      {/* <select
-        className="form-select"
-        onChange={(event) => setCategory(event.target.value)}
-      >
-        <option value=""></option>
-        <option value="product 1">product 1</option>
-        <option value="product 2">product 2</option>
-        <option value="product 3">product 3</option>
-      </select>
-      <ProductList category={category}></ProductList> */}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}> {user.name} </li>
+        ))}
+      </ul>
     </div>
   );
 }
+
+// const connect = () => console.log("connecting");
+// const disconnect = () => console.log("disconnecting");
+
+// function App() {
+//   // const [category, setCategory] = useState("");
+//   useEffect(() => {
+//     connect();
+//     return () => disconnect();
+//   });
+
+//   return (
+//     <div>
+//       {/* <select
+//         className="form-select"
+//         onChange={(event) => setCategory(event.target.value)}
+//       >
+//         <option value=""></option>
+//         <option value="product 1">product 1</option>
+//         <option value="product 2">product 2</option>
+//         <option value="product 3">product 3</option>
+//       </select>
+//       <ProductList category={category}></ProductList> */}
+//     </div>
+//   );
+// }
 
 // function App() {
 //   // const [cartItems, setCartItems] = useState([
