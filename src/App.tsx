@@ -25,6 +25,7 @@ interface User {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     // const fetchUsers = async () => {
@@ -57,6 +58,8 @@ function App() {
         if (err instanceof CanceledError) return;
         setError(err.message);
       });
+
+    return controller.abort();
   }, []);
 
   return (
