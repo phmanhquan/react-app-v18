@@ -20,9 +20,11 @@ import apiClient, { CanceledError } from "./services/api-client";
 import userService, { User } from "./services/user-service";
 import useUsers from "./hooks/useUsers";
 import TodoList from "./react-query/TodoList";
+import PostList from "./react-query/PostList";
 
 function App() {
-  return <TodoList></TodoList>;
+  return <PostList></PostList>;
+  // <TodoList></TodoList>;
 }
 
 // function App() {
