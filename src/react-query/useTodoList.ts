@@ -17,6 +17,7 @@ const useTodoList = () => {
   return useQuery<Todo[], Error>({
     queryKey: ["todoList"],
     queryFn: fetchTodoList,
+    staleTime: 10 * 1000, // 10s
   });
 };
 export default useTodoList;
