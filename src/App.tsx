@@ -21,10 +21,16 @@ import userService, { User } from "./services/user-service";
 import useUsers from "./hooks/useUsers";
 import TodoList from "./react-query/TodoList";
 import PostList from "./react-query/PostList";
+import TodoForm from "./react-query/TodoForm";
 
 function App() {
-  return <PostList></PostList>;
-  // <TodoList></TodoList>;
+  return (
+    // <PostList></PostList>;
+    <>
+      <TodoForm></TodoForm>
+      <TodoList></TodoList>
+    </>
+  );
 }
 
 // function App() {
