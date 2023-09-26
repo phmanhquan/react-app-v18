@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Todo } from "./hooks/useTodoList";
 import useAddTodo from "./hooks/useAddTodo";
 
 const TodoForm = () => {
