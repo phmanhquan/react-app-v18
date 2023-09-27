@@ -1,13 +1,13 @@
 import Button from "./Components/Button/Button";
 import Alert from "./Components/Alert";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import ListGroup from "./Components/ListGroup";
 import "./App.css";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 import Like from "./Components/Like";
 import Message from "./Message";
 import produce from "immer";
-import NavBar from "./Components/NavBar";
+// import NavBar from "./Components/NavBar";
 import Cart from "./Components/Cart";
 import ExpandableText from "./Components/ExpandableText";
 import Form from "./Components/Form";
@@ -25,19 +25,36 @@ import TodoForm from "./react-query/TodoForm";
 import Counter from "./state-management/Counter";
 import TaskList from "./state-management/TaskList";
 import LoginStatus from "./state-management/LoginStatus";
+import tasksReducer from "./state-management/reducers/tasksReducer";
+import NavBar from "./state-management/NavBar";
+import HomePage from "./state-management/HomePage";
+import TasksContext from "./state-management/contexts/tasksContext";
 
 function App() {
+  const [tasks, dispatch] = useReducer(tasksReducer, []);
+
   return (
-    <LoginStatus></LoginStatus>
-    // <TaskList></TaskList>
-    // <Counter></Counter>
-    // <PostList></PostList>;
-    // <>
-    //   <TodoForm></TodoForm>
-    //   <TodoList></TodoList>
-    // </>
+    <TasksContext.Provider value={{ tasks, dispatch }}>
+      <NavBar></NavBar>
+      <HomePage></HomePage>
+    </TasksContext.Provider>
   );
 }
+
+// function App() {
+//   const [tasks, dispatch] = useReducer(tasksReducer, []);
+
+//   return (
+//     <LoginStatus></LoginStatus>
+//     // <TaskList></TaskList>
+//     // <Counter></Counter>
+//     // <PostList></PostList>;
+//     // <>
+//     //   <TodoForm></TodoForm>
+//     //   <TodoList></TodoList>
+//     // </>
+//   );
+// }
 
 // function App() {
 //   const { users, error, isLoading, setUsers, setError } = useUsers();
