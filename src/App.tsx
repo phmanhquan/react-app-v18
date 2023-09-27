@@ -23,10 +23,12 @@ import TodoList from "./react-query/TodoList";
 import PostList from "./react-query/PostList";
 import TodoForm from "./react-query/TodoForm";
 import Counter from "./state-management/Counter";
+import TaskList from "./state-management/TaskList";
 
 function App() {
   return (
-    <Counter></Counter>
+    <TaskList></TaskList>
+    // <Counter></Counter>
     // <PostList></PostList>;
     // <>
     //   <TodoForm></TodoForm>
