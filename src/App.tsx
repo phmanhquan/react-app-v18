@@ -22,14 +22,16 @@ import useUsers from "./hooks/useUsers";
 import TodoList from "./react-query/TodoList";
 import PostList from "./react-query/PostList";
 import TodoForm from "./react-query/TodoForm";
+import Counter from "./state-management/Counter";
 
 function App() {
   return (
+    <Counter></Counter>
     // <PostList></PostList>;
-    <>
-      <TodoForm></TodoForm>
-      <TodoList></TodoList>
-    </>
+    // <>
+    //   <TodoForm></TodoForm>
+    //   <TodoList></TodoList>
+    // </>
   );
 }
 
