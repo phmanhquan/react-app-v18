@@ -1,8 +1,8 @@
 const UserListPage = () => {
   const users = [
-    { id: 1, name: 'Mosh' },
-    { id: 2, name: 'John' },
-    { id: 3, name: 'Alice' },
+    { id: 1, name: "Tí" },
+    { id: 2, name: "Thỏ" },
+    { id: 3, name: "Báo" },
   ];
   return (
     <ul className="list-group">
