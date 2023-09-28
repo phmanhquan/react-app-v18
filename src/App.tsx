@@ -25,24 +25,18 @@ import TodoForm from "./react-query/TodoForm";
 import Counter from "./state-management/Counter";
 import TaskList from "./state-management/TaskList";
 import LoginStatus from "./state-management/LoginStatus";
-import tasksReducer from "./state-management/reducers/tasksReducer";
 import NavBar from "./state-management/NavBar";
 import HomePage from "./state-management/HomePage";
-import TasksContext from "./state-management/contexts/tasksContext";
-import authReducer from "./state-management/reducers/authReducer";
-import AuthContext from "./state-management/contexts/authContext";
 import AuthProvider from "./state-management/AuthProvider";
+import TasksProvider from "./state-management/TasksProvider";
 
 function App() {
-  const [tasks, tasksDispatch] = useReducer(tasksReducer, []);
-  const [user, authDispatch] = useReducer(authReducer, "");
-
   return (
     <AuthProvider>
-      <TasksContext.Provider value={{ tasks, dispatch: tasksDispatch }}>
+      <TasksProvider>
         <NavBar></NavBar>
         <HomePage></HomePage>
-      </TasksContext.Provider>
+      </TasksProvider>
     </AuthProvider>
   );
 }
