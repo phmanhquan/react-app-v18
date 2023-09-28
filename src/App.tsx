@@ -34,6 +34,7 @@ function App() {
   return (
     <AuthProvider>
       <TasksProvider>
+        <Counter></Counter>
         <NavBar></NavBar>
         <HomePage></HomePage>
       </TasksProvider>
