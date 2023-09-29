@@ -4,11 +4,13 @@ import ContactPage from "./ContactPage";
 import UserDetail from "./UserDetail";
 import Layout from "./Layout";
 import UsersPage from "./UsersPage";
+import ErrorPage from "./ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage></HomePage> },
       {
@@ -18,7 +20,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "/contact", element: <ContactPage></ContactPage> },
 ]);
 
 export default router;
